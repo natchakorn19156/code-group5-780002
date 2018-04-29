@@ -121,6 +121,30 @@
 			})
 		}
 
+		count_item();
+		function count_item(){
+			$.ajax({
+				url : "process.php",
+				method : "POST",
+				data : {count_item:1},
+				success : function(data){
+					$("#in").html(data);
+				}
+			})
+		}
+
+		wish();
+		function wish(){
+			$.ajax({
+				url : "process.php",
+				method : "POST",
+				data : {getL:1},
+				success : function(data){
+					$("#this").html(data);
+				}
+			})
+		}
+
 		$("body").delegate("#add","click",function(event){
 			var pid = $(this).attr("pid");
 			event.preventDefault();
@@ -160,58 +184,38 @@
 				}
 			})
 		})
-
-		detail();
-		function detail(){
-			$.ajax({
-				url : "process.php",
-				method : "POST",
-				data : {deta:1},
-				success : function(data){
-					$("#de").html(data);
-				}
-			})
-		}
-
-		count_item();
-		function count_item(){
-			$.ajax({
-				url : "process.php",
-				method : "POST",
-				data : {count_item:1},
-				success : function(data){
-					$("#in").html(data);
-				}
-			})
-		}
-
-      $("body").delegate("#wishlist","click",function(event){
-			event.preventDefault();
-			$.ajax({
-				url : "process.php",
-				method : "POST",
-				data : {getL:1},
-				success : function(data){
-					$('#this').html(data);
-				}
-			})
-		})
-      $("body").delegate("#searchBtn","click",function(event){
-      	var text = document.getElementById("searchText").value;
-			event.preventDefault();
+		
+	
+		var text;
+		$("body").delegate("#searchBtn","click",function(event){
+			text = document.getElementById("searchText").value;
+			event.preventDefault();;
 			$.ajax({
 				url : "process.php",
 				method : "POST",
 				data : {searchBtn:1,searchText:text},
 				success : function(data){
+					found();
 					$('#ff').html(data);
 				}
 			})
 		})
+		found();
+		function found(){
+			$.ajax({
+				url : "process.php",
+				method : "POST",
+				data : {result:1},
+				success : function(data){
+					$("#result").html(data);
+				}
+			})
+		}
 
 	});
 
 </script>
+
 <div class="fh5co-loader"></div>
 
 <nav class="fh5co-nav" role="navigation">
